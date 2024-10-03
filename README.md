@@ -10,6 +10,8 @@ If you enter 2 players only, the sheet assumes that you are playing with the sta
 - Third click marks it as "-".
 - Another click will clear the cell.
 
+You can click on a suspect/weapon/location to highlight it, e.g. to indicate it's a card you've already shown.
+
 Undo and redo buttons across the top of the page.
 
 Reset button at the bottom of the page.

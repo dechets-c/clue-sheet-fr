@@ -219,6 +219,7 @@ function generateSheet() {
 	document.getElementById("undoButton").classList.remove("hidden");
 	document.getElementById("redoButton").classList.remove("hidden");
 	document.getElementById("resetButton").classList.remove("hidden");
+	document.getElementById("instructions").classList.add("hidden");
 
 	writeValueToLocalStorage("numberOfPlayers", numberOfPlayers);
 	writeValueToLocalStorage("playerInitialsInput", playerInitialsInput);
@@ -386,6 +387,7 @@ function resetSheet() {
 	document.getElementById("undoButton").classList.add("hidden");
 	document.getElementById("redoButton").classList.add("hidden");
 	document.getElementById("resetButton").classList.add("hidden");
+	document.getElementById("instructions").classList.remove("hidden");
 }
 
 function clearIndexedDB() {

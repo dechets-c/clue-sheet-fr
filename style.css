@@ -34,6 +34,7 @@ h1 {
 	color: white;
 	font-size: 1.5em;
 	border-collapse: collapse;
+	margin-top: 1em;
 }
 
 #sheet tr,
@@ -76,6 +77,8 @@ h1 {
 	background: rgb(20, 20, 20);
 	text-align: center;
 	color: white;
+	max-width: 2em;
+	word-wrap: anywhere;
 }
 
 #sheet .playerInitialBoard {
@@ -169,7 +172,7 @@ input[type="text"] {
 
 #btnContainer {
 	display: flex;
-	margin: 2em 0;
+	margin-top: 1em;
 }
 
 #sourceLink, #sourceLink:visited {
@@ -180,4 +183,12 @@ input[type="text"] {
 
 #sourceLink:hover {
 	color: rgb(122, 122, 255);
+}
+
+#instructions {
+	width: 50%;
+	font-family: "Nunito", sans-serif;
+	padding: 0.5em;
+	color: white;
+	text-align: center;
 }
