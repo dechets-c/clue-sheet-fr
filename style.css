@@ -1,0 +1,173 @@
+body {
+	background: rgb(32, 32, 32);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+h1 {
+	font-family: "Nunito", sans-serif;
+	color: white;
+	font-size: 2em;
+	margin: 0.3em;
+}
+
+#container {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+}
+
+.hidden {
+	display: none !important;
+}
+
+#sheet {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	font-family: "Nunito", sans-serif;
+	color: white;
+	font-size: 1.5em;
+	border-collapse: collapse;
+}
+
+#sheet tr,
+#sheet th {
+	border: 2px white solid;
+	border-bottom: none;
+}
+
+#sheet tr:last-child {
+	border: 2px white solid;
+}
+
+#sheet td:first-child {
+	border-left: none;
+	width: 7em;
+	padding-left: 0.25em;
+	background: rgb(20, 20, 20);
+}
+
+#sheet td {
+	border-left: 2px white solid;
+	width: 2em;
+	user-select: none;
+}
+
+#sheet .headerRow {
+	color: rgb(128, 128, 128);
+	font-variant: small-caps;
+	background: rgb(48, 48, 48);
+	padding-left: 0.25em;
+}
+
+#sheet .headerRow td:first-child {
+	width: calc(7em - 0.25em);
+	background: rgb(48, 48, 48);
+	text-align: center;
+}
+
+#sheet .playerInitial {
+	background: rgb(20, 20, 20);
+	text-align: center;
+	color: white;
+}
+
+#sheet .playerInitialBoard {
+	color: #ff7bea;
+}
+
+#sheet .clickableCell {
+	text-align: center;
+	line-height: 1em;
+}
+
+.userEntryContainer {
+	color: white;
+	padding: 0.5em;
+	display: flex;
+	flex-direction: column;
+	font-size: 1.5em;
+}
+
+.userEntry {
+	display: flex;
+	justify-content: flex-end;
+}
+
+label {
+	font-family: "Nunito", sans-serif;
+	padding: 0.5em;
+	color: white;
+}
+
+input[type="number"],
+input[type="text"] {
+	font-size: 1.5em;
+	width: 2em;
+	margin-bottom: 0.5em;
+	border: 2px solid #444444;
+	border-radius: 5px;
+	background-color: #333333;
+	color: white;
+	text-align: center;
+}
+
+#generateButton {
+	font-size: 1em;
+	margin-bottom: 1em;
+}
+
+.darkButton {
+	background-color: #333333;
+	color: white;
+	border: none;
+	padding: 0.75em 1.5em;
+	cursor: pointer;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	transition: background-color 0.3s ease;
+}
+
+.darkButton:hover {
+	background-color: #444444;
+}
+
+.invalid {
+	filter: opacity(0.5);
+}
+
+.shown {
+	color: rgb(90, 255, 90);
+}
+
+.valid {
+	color: red;
+	font-weight: bold;
+}
+
+.possiblyValid {
+	color: rgb(255, 239, 90);
+}
+
+#resetButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.5em;
+	margin: 2em 0;
+}
+
+#resetButton i {
+	margin-right: 0.25em;
+}
+
+#btnContainer {
+	display: flex;
+	margin: 2em 0;
+}
