@@ -1,7 +1,6 @@
-# Clue Sheet
-An online interactive sheet for the board game Clue (or Cluedo, depending on region).
+# [Clue Sheet](https://cluesheet.pana.moe)
 
-Click here to open the sheet.
+An online interactive sheet for the board game Clue (or Cluedo, depending on region).
 
 Select the number of players in the game and enter their initials in the appropriate boxes.
 If you enter 2 players only, the sheet assumes that you are playing with the standard two player rules of having 4 of the cards distributed on the board and automatically generates another column for these "board" cards.
