@@ -19,11 +19,10 @@
 <body>
 	<div id="container">
 		<div id="btnContainer">
-			<button id="undoButton" class="darkButton"><i class="material-icons">undo</i></button>
+			<button id="undoButton" class="darkButton hidden"><i class="material-icons">undo</i></button>
 			<h1>Clue Sheet</h1>
-			<button id="redoButton" class="darkButton"><i class="material-icons">redo</i></button>
+			<button id="redoButton" class="darkButton hidden"><i class="material-icons">redo</i></button>
 		</div>
-		<div id="dataDisplay"></div>
 		<div class="userEntryContainer">
 			<div class="userEntry">
 				<label for="numUsers"># of Players:</label>
@@ -32,10 +31,9 @@
 			<div id="userFormContainer"></div>
 			<button id="generateButton" class="darkButton">Generate</button>
 		</div>
-		<table id="sheet">
-			
-		</table>
-		<button id="resetButton" class="darkButton"><i class="material-icons">refresh</i>RESET</button>
+		<table id="sheet"></table>
+		<button id="resetButton" class="darkButton hidden"><i class="material-icons">refresh</i>RESET</button>
+		<a id="sourceLink" href="https://github.com/VS-W/clue-sheet">Source on Github</a>
 	</div>
 </body>
 </html>

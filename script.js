@@ -93,8 +93,8 @@ const dataTemplate = {
 
 let data = structuredClone(dataTemplate);
 let currentPosition = 0;
-const dbName = 'database';
-const storeName = 'dataStore';
+const dbName = "database";
+const storeName = "dataStore";
 
 function toggleCell(block, text, column) {
 	writeDataToIndexedDB(data);
@@ -184,8 +184,8 @@ function toID(str) {
 
 function generateRows(block, columns) {
 	return Object.keys(data[block]).map(text => {
-		const row = document.createElement('tr');
-		const cell = document.createElement('td');
+		const row = document.createElement("tr");
+		const cell = document.createElement("td");
 		cell.textContent = text;
 		cell.addEventListener("click", () => {
 			writeDataToIndexedDB(data);
@@ -196,7 +196,7 @@ function generateRows(block, columns) {
 		cell.id = toID(text);
 		row.appendChild(cell);
 		for (let i = 0; i < columns; i++) {
-			const clickableCell = document.createElement('td');
+			const clickableCell = document.createElement("td");
 			clickableCell.classList.add("clickableCell");
 			clickableCell.addEventListener("click", () => {
 				toggleCell(block, text, i);
@@ -216,6 +216,9 @@ function generateSheet() {
 	});
 	const sheet = document.querySelector("#sheet");
 	document.querySelector("#sheet").classList.remove("hidden");
+	document.getElementById("undoButton").classList.remove("hidden");
+	document.getElementById("redoButton").classList.remove("hidden");
+	document.getElementById("resetButton").classList.remove("hidden");
 
 	writeValueToLocalStorage("numberOfPlayers", numberOfPlayers);
 	writeValueToLocalStorage("playerInitialsInput", playerInitialsInput);
@@ -231,8 +234,8 @@ function generateSheet() {
 	sheet.innerHTML = "";
 
 	Object.keys(data).forEach(block => {
-		const headerRow = document.createElement('tr');
-		const headerCell = document.createElement('td');
+		const headerRow = document.createElement("tr");
+		const headerCell = document.createElement("td");
 		headerCell.textContent = block;
 		headerRow.appendChild(headerCell);
 		sheet.appendChild(headerRow);
@@ -242,7 +245,7 @@ function generateSheet() {
 	});
 	
 	for (let i = 0; i < colCount; i++) {
-		const playerInitial = document.createElement('td');
+		const playerInitial = document.createElement("td");
 		playerInitial.classList.add("playerInitial");
 		playerInitial.textContent = playerInitialsInput[i + 1]
 		document.querySelector(".headerRow").appendChild(playerInitial);
@@ -258,7 +261,11 @@ function generateSheet() {
 }
 
 function generateInitialsForm() {
-	const numUsers = parseInt(document.getElementById("numUsers").value);
+	let numUsers = parseInt(document.getElementById("numUsers").value);
+	if (numUsers < 2) {
+		numUsers = 2;
+		document.getElementById("numUsers").value = 2;
+	}
 	const userFormContainer = document.getElementById("userFormContainer");
 
 	userFormContainer.innerHTML = "";
@@ -292,7 +299,7 @@ function prefill() {
 		
 		indexedDB.open(dbName, 1).onsuccess = function (event) {
 			const db = event.target.result;
-			const transaction = db.transaction(storeName, 'readonly');
+			const transaction = db.transaction(storeName, "readonly");
 			const store = transaction.objectStore(storeName);
 			store.count().onsuccess = function (event) {
 				const count = event.target.result;
@@ -311,7 +318,7 @@ function writeDataToIndexedDB(newData) {
 
 	request.onsuccess = function (event) {
 		const db = event.target.result;
-		const store = db.transaction(storeName, 'readwrite').objectStore(storeName, { autoIncrement: true });
+		const store = db.transaction(storeName, "readwrite").objectStore(storeName, { autoIncrement: true });
 
 		console.log(currentPosition)
 		store.put(newData, currentPosition).onsuccess = function (event) {
@@ -339,7 +346,7 @@ function writeDataToIndexedDB(newData) {
 function undo() {
 	indexedDB.open(dbName, 1).onsuccess = function (event) {
 		const db = event.target.result;
-		const transaction = db.transaction(storeName, 'readonly');
+		const transaction = db.transaction(storeName, "readonly");
 		const store = transaction.objectStore(storeName);
 		store.count().onsuccess = function (event) {
 			const count = event.target.result;
@@ -359,7 +366,7 @@ function undo() {
 function redo() {
 	indexedDB.open(dbName, 1).onsuccess = function (event) {
 		const db = event.target.result;
-		const transaction = db.transaction(storeName, 'readonly');
+		const transaction = db.transaction(storeName, "readonly");
 		const store = transaction.objectStore(storeName);
 		store.count().onsuccess = function (event) {
 			const count = event.target.result;
@@ -374,15 +381,18 @@ function redo() {
 
 function resetSheet() {
 	writeValueToLocalStorage("sheetActive", false);
-	document.querySelector("#sheet").classList.add("hidden");
 	document.querySelector(".userEntryContainer").classList.remove("hidden");
+	document.querySelector("#sheet").classList.add("hidden");
+	document.getElementById("undoButton").classList.add("hidden");
+	document.getElementById("redoButton").classList.add("hidden");
+	document.getElementById("resetButton").classList.add("hidden");
 }
 
 function clearIndexedDB() {
 	indexedDB.open(dbName, 1).onsuccess = function (event) {
 		const db = event.target.result;
 
-		const transaction = db.transaction(storeName, 'readwrite');
+		const transaction = db.transaction(storeName, "readwrite");
 		const store = transaction.objectStore(storeName);
 
 		const clearRequest = store.clear();
@@ -402,7 +412,7 @@ function getDBEntry(id) {
 	console.log(id);
 	indexedDB.open(dbName, 1).onsuccess = function (event) {
 		const db = event.target.result;
-		db.transaction(storeName, 'readonly').objectStore(storeName).get(id).onsuccess = function (event) {
+		db.transaction(storeName, "readonly").objectStore(storeName).get(id).onsuccess = function (event) {
 			data = event.target.result;
 			refreshCells();
 		};
@@ -412,7 +422,7 @@ function getDBEntry(id) {
 function getLastDBEntry() {
 	indexedDB.open(dbName, 1).onsuccess = function (event) {
 		const db = event.target.result;
-		const store = db.transaction(storeName, 'readonly').objectStore(storeName);
+		const store = db.transaction(storeName, "readonly").objectStore(storeName);
 		store.count().onsuccess = function (event) {
 			const count = event.target.result - 1;
 			store.get(count).onsuccess = function (event) {
@@ -443,14 +453,14 @@ function readValueFromLocalStorage(key) {
 	}
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
 	generateInitialsForm();
 
 	document.getElementById("numUsers").addEventListener("change", generateInitialsForm);
 	document.getElementById("generateButton").addEventListener("click", generateSheet);
-	document.getElementById('undoButton').addEventListener('click', undo);
-	document.getElementById('redoButton').addEventListener('click', redo);
-	document.getElementById('resetButton').addEventListener('click', clearIndexedDB);
+	document.getElementById("undoButton").addEventListener("click", undo);
+	document.getElementById("redoButton").addEventListener("click", redo);
+	document.getElementById("resetButton").addEventListener("click", clearIndexedDB);
 	
 	prefill();
 });
