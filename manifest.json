@@ -1,0 +1,23 @@
+{
+	"start_url": "/",
+	"icons": [
+		{
+			"src": "launcher-icon-4x.png",
+			"sizes": "128x128",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "launcher-icon-4x.png",
+			"sizes": "128x128",
+			"type": "image/png",
+			"purpose": "maskable"
+		}
+	],
+	"name": "Clue Sheet",
+	"short_name": "Clue Sheet",
+	"display": "fullscreen",
+	"orientation": "portrait",
+	"background_color": "#333",
+	"theme_color": "#111"
+}
