@@ -1,97 +1,101 @@
-const dataTemplate = {
-	"suspects": {
-		"Green": {
-			"cells": [0, 0, 0],
-			"shown": false
+function get_template(player_number) {
+	const dataTemplate = {
+		"suspects": {
+			"Olive": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Moutarde": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Pervenche": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Violet": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Rose": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Leblanc": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			}
 		},
-		"Mustard": {
-			"cells": [0, 0, 0],
-			"shown": false
+		"weapons": {
+			"Chandelier": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Poignard": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Tuyau": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Revolver": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Corde": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Clé": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			}
 		},
-		"Peacock": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Plum": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Scarlet": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"White": {
-			"cells": [0, 0, 0],
-			"shown": false
+		"locations": {
+			"Salle de reception": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Salle de billard": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Jardin d'hiver": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Salle à manger": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Entrée": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Cuisine": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Bibliothèque": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Sallon": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			},
+			"Bureau": {
+				"cells": Array(player_number).fill(0),
+				"shown": false
+			}
 		}
-	},
-	"weapons": {
-		"Candle Stick": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Dagger": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Lead Pipe": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Revolver": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Rope": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Wrench": {
-			"cells": [0, 0, 0],
-			"shown": false
-		}
-	},
-	"locations": {
-		"Ballroom": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Billiard Room": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Conservatory": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Dining Room": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Hall": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Kitchen": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Library": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Lounge": {
-			"cells": [0, 0, 0],
-			"shown": false
-		},
-		"Study": {
-			"cells": [0, 0, 0],
-			"shown": false
-		}
-	}
-};
+	};
+	return dataTemplate;
+}
 
-let data = structuredClone(dataTemplate);
+// default data for initial load (3 columns is a safe default)
+let data = get_template(3);
 let currentPosition = 0;
 const dbName = "database";
 const storeName = "dataStore";
@@ -179,7 +183,8 @@ function refreshCells(block) {
 }
 
 function toID(str) {
-	return str.toLowerCase().replace(" ", "");
+	// remove all whitespace and make lowercase for stable IDs
+	return str.toLowerCase().replace(/\s+/g, "");
 }
 
 function generateRows(block, columns) {
@@ -231,6 +236,9 @@ function generateSheet() {
 		boardRule = true;
 	}
 
+	// (re)create data structure with the correct number of columns
+	data = get_template(parseInt(colCount, 10));
+
 	document.querySelector(".userEntryContainer").classList.add("hidden");
 	sheet.innerHTML = "";
 
@@ -245,11 +253,15 @@ function generateSheet() {
 		generateRows(block, colCount).forEach(child => sheet.appendChild(child));
 	});
 	
+	// Append player initials to every header row so columns align
+	const headerRows = Array.from(document.querySelectorAll(".headerRow"));
 	for (let i = 0; i < colCount; i++) {
-		const playerInitial = document.createElement("td");
-		playerInitial.classList.add("playerInitial");
-		playerInitial.textContent = playerInitialsInput[i + 1]
-		document.querySelector(".headerRow").appendChild(playerInitial);
+		headerRows.forEach(headerRow => {
+			const playerInitial = document.createElement("td");
+			playerInitial.classList.add("playerInitial");
+			playerInitial.textContent = playerInitialsInput[i] || "";
+			headerRow.appendChild(playerInitial);
+		});
 	}
 
 	if (boardRule) {
@@ -275,7 +287,7 @@ function generateInitialsForm() {
 		const userEntry = document.createElement("div");
 		userEntry.className = "userEntry";
 		userEntry.innerHTML = `
-			<label for="user${i}">Player ${i + 1} Initial:</label>
+			<label for="user${i}">Initiales du joueur ${i + 1} :</label>
 			<input type="text" id="user${i}" name="user${i}">
 		`;
 		userFormContainer.appendChild(userEntry);

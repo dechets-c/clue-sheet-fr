@@ -16,39 +16,41 @@
 
 	<script src="script.js"></script>
 
-	<title>Clue Sheet</title>
+	<title>Feuille Cluedo</title>
 </head>
 <body>
 	<div id="container">
 		<div id="btnContainer">
 			<button id="undoButton" class="darkButton hidden"><i class="material-icons">undo</i></button>
-			<h1>Clue Sheet</h1>
+			<h1>Feuille Cluedo</h1>
 			<button id="redoButton" class="darkButton hidden"><i class="material-icons">redo</i></button>
 		</div>
 		<div id="instructions">
 			<h2>Instructions</h2>
-			<p>Select the number of players in the game and enter their initials in the appropriate boxes.<br>If you enter 2 players only, the sheet assumes that you are playing with the standard two player rules of having 4 of the cards distributed on the board and automatically generates another column for these "board" cards.</p>
+			<p>Sélectionnez le nombre de joueurs et entrez leurs initiales dans les champs appropriés.<br>Si vous entrez seulement 2 joueurs, la feuille appliquera la règle standard à deux joueurs avec 4 cartes placées sur le plateau et générera automatiquement une colonne pour ces cartes "plateau".</p>
 
-			<p>Click a cell once to mark an "X".<br>
-			Click it again to mark a "?".<br>
-			Third click marks it as "-".<br>
-			Another click will clear the cell.</p>
+			<p>Cliquez une fois sur une case pour marquer un "X".<br>
+			Cliquez à nouveau pour marquer un "?".<br>
+			Le troisième clic marque un "-".<br>
+			Un autre clic effacera la case.</p>
 
-			<p>You can click on a suspect/weapon/location to highlight it, e.g. to indicate it's a card you've already shown.</p>
+			<p>Vous pouvez cliquer sur un suspect/arme/lieu pour le surligner, par exemple pour indiquer une carte que vous avez déjà montrée.</p>
 
-			<p>Undo and redo buttons across the top of the page.<br>Reset button at the bottom of the page.</p>
+			<p>Boutons Annuler et Rétablir en haut de la page.<br>Bouton Réinitialiser en bas de la page.</p>
 		</div>
 		<div class="userEntryContainer">
 			<div class="userEntry">
-				<label for="numUsers"># of Players:</label>
+				<label for="numUsers">Nombre de joueurs :</label>
 				<input type="number" id="numUsers" min="2" value="2">
 			</div>
 			<div id="userFormContainer"></div>
-			<button id="generateButton" class="darkButton">Generate</button>
+			<button id="generateButton" class="darkButton">Générer</button>
 		</div>
 		<table id="sheet"></table>
-		<button id="resetButton" class="darkButton hidden"><i class="material-icons">refresh</i>RESET</button>
-		<a id="sourceLink" href="https://github.com/VS-W/clue-sheet">Source on Github</a>
+	<button id="resetButton" class="darkButton hidden"><i class="material-icons">refresh</i>RÉINITIALISER</button>
+
+	<a id="sourceLink" href="https://github.com/VS-W/clue-sheet">Source sur Github (original)</a>
+	<a id="sourceLink" href="https://github.com/dechets-c/clue-sheet-fr">Source sur Github (ce fork)</a>
 	</div>
 </body>
 </html>

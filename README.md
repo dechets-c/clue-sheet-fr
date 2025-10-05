@@ -17,3 +17,8 @@ Undo and redo buttons across the top of the page.
 Reset button at the bottom of the page.
 
 Data should survive a page refresh using IndexedDB and localStorage.
+
+## Notes on this fork
+
+- Fixed a bug where cells above player 3 were not interactive: the data template is now created with the proper number of columns and header rows are generated correctly.
+- Translated the UI into French (labels and instructions).
